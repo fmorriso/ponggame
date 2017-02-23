@@ -24,7 +24,7 @@ public class Ball extends Polkadot
 
     private double getRandomDelta()
     {
-        return Math.random() * 12 - 6;
+        return Math.random() * 14 - 7;
     }
 
     //modifier methods
