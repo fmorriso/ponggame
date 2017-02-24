@@ -112,6 +112,7 @@ public class Bumper
         return false;
     }
 
+
     // returns distance between (x1, y1) and (x2, y2)
     private double distance(double x1, double y1, double x2, double y2)
     {

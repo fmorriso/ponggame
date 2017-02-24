@@ -19,14 +19,12 @@ public class GameKeyListener implements KeyListener
 
     public void keyPressed(KeyEvent e)
     {
-        int keyCode = e.getKeyCode();
-        setPlayerKeyPressed(keyCode, true);
+        setPlayerKeyPressed(e.getKeyCode(), true);
     }
 
     public void keyReleased(KeyEvent e)
     {
-        int keyCode = e.getKeyCode();
-        setPlayerKeyPressed(keyCode, false);
+        setPlayerKeyPressed(e.getKeyCode(), false);
     }
 
     private void setPlayerKeyPressed(int keyCode, boolean pressed)

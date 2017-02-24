@@ -14,8 +14,7 @@ public class PongGame extends JPanel implements Runnable
 
     private static final double BALL_DIAM = 50;
 
-    private Player leftPlayer;
-    private Player rightPlayer;
+    private Player leftPlayer, rightPlayer;
 
     private Thread game;
 
@@ -45,15 +44,15 @@ public class PongGame extends JPanel implements Runnable
         record = 0;
         hits = 0;
 
-        leftPlayer = new Player(new GameKey(GameKeyType.UP, KeyEvent.VK_A), new GameKey(GameKeyType.DOWN, KeyEvent.VK_Z));
-        rightPlayer = new Player(new GameKey(GameKeyType.UP, KeyEvent.VK_UP), new GameKey(GameKeyType.DOWN, KeyEvent.VK_DOWN));
+        leftPlayer = new Player(new GameKey(GameKeyType.UP, KeyEvent.VK_A),
+                                new GameKey(GameKeyType.DOWN, KeyEvent.VK_Z));
+        rightPlayer = new Player(new GameKey(GameKeyType.UP, KeyEvent.VK_UP),
+                                 new GameKey(GameKeyType.DOWN, KeyEvent.VK_DOWN));
 
         game = new Thread(this);
-
         GameKeyListener listener = new GameKeyListener(game, leftPlayer, rightPlayer);
         addKeyListener(listener);
         setFocusable(true);
-
         game.start();
 
     }
