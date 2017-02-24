@@ -6,8 +6,6 @@ public class GameKey
 
     private GameKey() {/* prevent uninitialized instances */}
 
-    // Example:
-    // GameKey leftPlayerUpKey = new GameKey(GameKeyType.Up, KeyEvent.VK_W);
     public GameKey(GameKeyType type, int keyCode) {
         this.keyType = type;
         this.keyCode = keyCode;
@@ -31,7 +29,5 @@ public class GameKey
     public void setPressed(boolean pressed) {
         this.pressed = pressed;
     }
-
-
 
 }
