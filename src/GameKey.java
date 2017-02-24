@@ -16,11 +16,9 @@ public class GameKey
         return keyType;
     }
 
-
     public int getKeyCode() {
         return keyCode;
     }
-
 
     public boolean isPressed() {
         return pressed;

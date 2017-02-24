@@ -10,10 +10,28 @@ public class Player
     private Player()
     { /* prevent uninitialized instances */}
 
-    public Player(GameKey up, GameKey down)
+    public Player(GameKey key1, GameKey key2)
     {
-        this.upKey = up;
-        this.downKey = down;
+        switch (key1.getKeyType())
+        {
+            case UP:
+                this.upKey = key1;
+                break;
+            case DOWN:
+                this.downKey = key1;
+                break;
+        }
+
+        switch (key2.getKeyType())
+        {
+            case UP:
+                this.upKey = key2;
+                break;
+            case DOWN:
+                this.downKey = key2;
+                break;
+        }
+
         this.score = 0;
     }
 
