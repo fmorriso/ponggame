@@ -29,7 +29,7 @@ public class PongGame extends JPanel implements Runnable
     private boolean gameIsActive;
     private static final GameKey StopGameKey = new GameKey(GameKeyType.STOP, KeyEvent.VK_CLOSE_BRACKET);
 
-    private static final int WinningScore = 3;
+    private static final int WinningScore = 5;
 
     public PongGame()
     {
@@ -55,7 +55,6 @@ public class PongGame extends JPanel implements Runnable
 
         this.gameIsActive = true;
 
-
         game = new Thread(this);
         GameKeyListener listener = new GameKeyListener(game, leftPlayer, rightPlayer, StopGameKey);
         addKeyListener(listener);
@@ -64,7 +63,10 @@ public class PongGame extends JPanel implements Runnable
     }
 
     private double getRandomDelta(){
-        return Math.random() * FRAME / 40;
+        double minimumDelta = 10;
+        double computedDelta = Math.random() * FRAME / 40;
+        computedDelta = Math.max(computedDelta, minimumDelta);
+        return computedDelta;
     }
 
     public int getFrameSize()
