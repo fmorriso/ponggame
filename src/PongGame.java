@@ -26,6 +26,10 @@ public class PongGame extends JPanel implements Runnable
 
     private int hits, record;
 
+    private boolean gameIsActive;
+    private static final GameKey StopGameKey = new GameKey(GameKeyType.STOP, KeyEvent.VK_CLOSE_BRACKET);
+
+    private static final int WinningScore = 3;
 
     public PongGame()
     {
@@ -49,12 +53,14 @@ public class PongGame extends JPanel implements Runnable
         rightPlayer = new Player(new GameKey(GameKeyType.UP, KeyEvent.VK_UP),
                                  new GameKey(GameKeyType.DOWN, KeyEvent.VK_DOWN));
 
+        this.gameIsActive = true;
+
+
         game = new Thread(this);
-        GameKeyListener listener = new GameKeyListener(game, leftPlayer, rightPlayer);
+        GameKeyListener listener = new GameKeyListener(game, leftPlayer, rightPlayer, StopGameKey);
         addKeyListener(listener);
         setFocusable(true);
         game.start();
-
     }
 
     private double getRandomDelta(){
@@ -71,10 +77,9 @@ public class PongGame extends JPanel implements Runnable
         g.drawImage(myImage, 0, 0, getWidth(), getHeight(), null);
     }
 
-
     public void run()
     {
-        while (true)
+        while (this.gameIsActive)
         {
             if (leftPlayer.keyPressed(GameKeyType.UP))
                 bumperLeft.setY((bumperLeft.getY() <= 0) ? bumperLeft.getY() : bumperLeft.getY() - INCREM);
@@ -88,6 +93,10 @@ public class PongGame extends JPanel implements Runnable
             else if (rightPlayer.keyPressed(GameKeyType.DOWN))
                 bumperRight.setY((bumperRight.getY() + bumperRight.getYWidth() >= FRAME) ? bumperRight.getY() : bumperRight.getY() + INCREM);
 
+            else if (StopGameKey.isPressed()){
+                this.gameIsActive = false;
+            }
+
             // clear buffer and move ball
             myBuffer.setColor(BACKGROUND);
             myBuffer.fillRect(0, 0, FRAME, FRAME);
@@ -98,7 +107,6 @@ public class PongGame extends JPanel implements Runnable
             {
                 hits++;
                 BumperCollision.collide(bumperLeft, ball);
-
             }
 
             if (BumperCollision.isCollision(bumperRight, ball))
@@ -110,7 +118,6 @@ public class PongGame extends JPanel implements Runnable
             if ( ( ball.getX() - ball.getRadius() ) <= 0)
             {
                 rightPlayer.rewardPlayer();
-                myBuffer.drawString("Player Right:" + rightPlayer.getScore(), FRAME / 2, FRAME / 16);
 
                 ball.setX(FRAME / 2);
                 ball.setY(FRAME / 2);
@@ -124,13 +131,11 @@ public class PongGame extends JPanel implements Runnable
             if ( (ball.getX() + ball.getRadius() ) >= FRAME)
             {
                 leftPlayer.rewardPlayer();
-                myBuffer.drawString("Player Left:" + leftPlayer.getScore(), 0, FRAME / 16);
 
                 ball.setX(FRAME / 2);
                 ball.setY(FRAME / 2);
                 ball.setdx(getRandomDelta());
                 ball.setdy(getRandomDelta());
-
 
                 drawScreen();
 
@@ -177,11 +182,32 @@ public class PongGame extends JPanel implements Runnable
         // update hits on buffer
         myBuffer.setColor(Color.white);
         myBuffer.setFont(new Font("Monospaced", Font.BOLD, FRAME / 20));
-        myBuffer.drawString("Player Left:" + leftPlayer.getScore(), 0, FRAME / 16);
-        myBuffer.drawString("Player Right:" + rightPlayer.getScore(), FRAME / 2, FRAME / 16);
+
+        updateScoreBoard();
 
         repaint();
 
+    }
+
+    private void updateScoreBoard(){
+
+        String message = "Player Left:" + leftPlayer.getScore();
+        int x = 0;
+        myBuffer.drawString(message, x, getFrameSize() / 16);
+        if (leftPlayer.getScore() == WinningScore) {
+            this.gameIsActive = false;
+            message = "WINNER";
+            myBuffer.drawString(message, x, getFrameSize() / 8);
+        }
+
+        message = "Player Right:" + rightPlayer.getScore();
+        x = getFrameSize() / 2;
+        myBuffer.drawString(message, x, getFrameSize() / 16);
+        if (rightPlayer.getScore() == WinningScore) {
+            this.gameIsActive = false;
+            message = "WINNER";
+            myBuffer.drawString(message, x, getFrameSize() / 8);
+        }
     }
 
 }

@@ -6,15 +6,17 @@ public class GameKeyListener implements KeyListener
     private Thread game;
     private Player leftPlayer;
     private Player rightPlayer;
+    GameKey stopGameKey;
 
     private GameKeyListener()
     {/* prevent uninitialized instances */}
 
-    public GameKeyListener(Thread game, Player left, Player right)
+    public GameKeyListener(Thread game, Player left, Player right, GameKey stopGameKey)
     {
         this.game = game;
         this.leftPlayer = left;
         this.rightPlayer = right;
+        this.stopGameKey = stopGameKey;
     }
 
     public void keyPressed(KeyEvent e)
@@ -41,6 +43,8 @@ public class GameKeyListener implements KeyListener
         } else if (keyCode == rightPlayer.getKeyCode(GameKeyType.DOWN))
         {
             rightPlayer.setKeyPressed(GameKeyType.DOWN, pressed);
+        } else if(keyCode == stopGameKey.getKeyCode()) {
+            stopGameKey.setPressed(true);
         }
     }
 
