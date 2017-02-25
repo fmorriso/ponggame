@@ -175,10 +175,10 @@ public class PongGame extends JPanel implements Runnable
         bumperLeft.draw(myBuffer);
 
         // customize the bumpers and ball
-        myBuffer.setColor(BACKGROUND);
-        myBuffer.fillOval((int) (ball.getX() - ball.getRadius() / 2), (int) (ball.getY() - ball.getRadius() / 2), (int) (ball.getRadius()), (int) (ball.getRadius()));
-        myBuffer.fillRect(bumperLeft.getX(), bumperLeft.getY() + bumperLeft.getXWidth() / 4, bumperLeft.getXWidth() * 3 / 4, bumperLeft.getYWidth() - bumperLeft.getXWidth() / 2);
-        myBuffer.fillRect(bumperRight.getX() + bumperRight.getXWidth() / 4, bumperRight.getY() + bumperRight.getXWidth() / 4, bumperRight.getXWidth() * 3 / 4, bumperRight.getYWidth() - bumperRight.getXWidth() / 2);
+        //myBuffer.setColor(BACKGROUND);
+        //myBuffer.fillOval((int) (ball.getX() - ball.getRadius() / 2), (int) (ball.getY() - ball.getRadius() / 2), (int) (ball.getRadius()), (int) (ball.getRadius()));
+        //myBuffer.fillRect(bumperLeft.getX(), bumperLeft.getY() + bumperLeft.getXWidth() / 4, bumperLeft.getXWidth() * 3 / 4, bumperLeft.getYWidth() - bumperLeft.getXWidth() / 2);
+        //myBuffer.fillRect(bumperRight.getX() + bumperRight.getXWidth() / 4, bumperRight.getY() + bumperRight.getXWidth() / 4, bumperRight.getXWidth() * 3 / 4, bumperRight.getYWidth() - bumperRight.getXWidth() / 2);
 
 
         // update hits on buffer
