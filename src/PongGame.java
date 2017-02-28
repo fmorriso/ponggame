@@ -11,6 +11,7 @@ public class PongGame extends JPanel implements Runnable
     private static final Color BACKGROUND = Color.decode("#240062"); //.black;
     private static final Color BALL_COLOR = Color.green;
     private static final Color BUMPER_COLOR = Color.WHITE;
+    private static final Color TEXT_COLOR = Color.WHITE;
 
     private static final double BALL_DIAM = 50;
 
@@ -31,8 +32,8 @@ public class PongGame extends JPanel implements Runnable
     private static final GameKey ResetGameKey = new GameKey(GameKeyType.RESET, KeyEvent.VK_R);
 
     private static final int WinningScore = 5;
-    private final int normalPauseInterval = 50;
-    private final int gameResetPauseInterval = 3000;
+    private final int ballMovementPausInterval = 50;
+    private final int gameResetPauseInterval = 2000;
 
     public PongGame()
     {
@@ -136,8 +137,6 @@ public class PongGame extends JPanel implements Runnable
             }
 
             drawScreen();
-
-
         }
     }
 
@@ -151,12 +150,7 @@ public class PongGame extends JPanel implements Runnable
     private void resetGame() {
         leftPlayer.resetScore();
         rightPlayer.resetScore();
-        // give viewer a chance to set that game was reset
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        resetBallToStartingPosition();
     }
 
     private void drawScreen()
@@ -165,22 +159,14 @@ public class PongGame extends JPanel implements Runnable
         bumperRight.draw(myBuffer);
         bumperLeft.draw(myBuffer);
 
-        // customize the bumpers and ball
-        //myBuffer.setColor(BACKGROUND);
-        //myBuffer.fillOval((int) (ball.getX() - ball.getRadius() / 2), (int) (ball.getY() - ball.getRadius() / 2), (int) (ball.getRadius()), (int) (ball.getRadius()));
-        //myBuffer.fillRect(bumperLeft.getX(), bumperLeft.getY() + bumperLeft.getXWidth() / 4, bumperLeft.getXWidth() * 3 / 4, bumperLeft.getYWidth() - bumperLeft.getXWidth() / 2);
-        //myBuffer.fillRect(bumperRight.getX() + bumperRight.getXWidth() / 4, bumperRight.getY() + bumperRight.getXWidth() / 4, bumperRight.getXWidth() * 3 / 4, bumperRight.getYWidth() - bumperRight.getXWidth() / 2);
-
-
         // update hits on buffer
-        myBuffer.setColor(Color.white);
-        myBuffer.setFont(new Font("Monospaced", Font.BOLD, FRAME / 20));
 
         updateScoreBoard();
 
         repaint();
 
-        int pauseInterval = normalPauseInterval;
+        // pause to allow players to see ball movement or game reset message
+        int pauseInterval = ballMovementPausInterval;
         if (ResetGameKey.isPressed()){
             pauseInterval = gameResetPauseInterval;
             ResetGameKey.setPressed(false);
@@ -195,6 +181,9 @@ public class PongGame extends JPanel implements Runnable
     }
 
     private void updateScoreBoard(){
+
+        myBuffer.setColor(TEXT_COLOR);
+        myBuffer.setFont(new Font("Monospaced", Font.BOLD, FRAME / 22));
 
         String message = "Player Left:" + leftPlayer.getScore();
         int x = 0;
@@ -224,5 +213,4 @@ public class PongGame extends JPanel implements Runnable
             myBuffer.drawString(message, x, getFrameSize() / 3);
         }
     }
-
 }
