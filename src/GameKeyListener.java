@@ -56,8 +56,7 @@ public class GameKeyListener implements KeyListener
     @Override
     public void keyTyped(KeyEvent arg0)
     {
-
-
+        // no code needed - just need to define as required by Runnable
     }
 }
 
