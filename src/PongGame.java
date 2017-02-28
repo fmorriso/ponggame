@@ -31,6 +31,8 @@ public class PongGame extends JPanel implements Runnable
     private static final GameKey ResetGameKey = new GameKey(GameKeyType.RESET, KeyEvent.VK_R);
 
     private static final int WinningScore = 5;
+    private final int normalPauseInterval = 50;
+    private final int gameResetPauseInterval = 3000;
 
     public PongGame()
     {
@@ -99,7 +101,7 @@ public class PongGame extends JPanel implements Runnable
             else if (StopGameKey.isPressed()){
                 this.gameIsActive = false;
             } else if(ResetGameKey.isPressed()){
-                ResetGame();
+                resetGame();
             }
 
             // clear buffer and move ball
@@ -112,68 +114,49 @@ public class PongGame extends JPanel implements Runnable
             {
                 hits++;
                 BumperCollision.collide(bumperLeft, ball);
-            }
-
-            if (BumperCollision.isCollision(bumperRight, ball))
+            } else if (BumperCollision.isCollision(bumperRight, ball))
             {
                 hits++;
                 BumperCollision.collide(bumperRight, ball);
             }
 
+            // did the player on the left miss the ball coming at his bumper ?
             if ( ( ball.getX() - ball.getRadius() ) <= 0)
             {
+                // Yes, reward the player on the right
                 rightPlayer.rewardPlayer();
-
-                ball.setX(FRAME / 2);
-                ball.setY(FRAME / 2);
-                ball.setdx(getRandomDelta());
-                ball.setdy(getRandomDelta());
-                //game.sleep(1000);
-                //record = (record>hits)? record : hits;
-                //hits = 0;
+                resetBallToStartingPosition();
             }
-
-            if ( (ball.getX() + ball.getRadius() ) >= FRAME)
+            // did the player on the right miss the ball coming at his bumper?
+            else if ( (ball.getX() + ball.getRadius() ) >= FRAME)
             {
+                // Yes, reward the player on the left
                 leftPlayer.rewardPlayer();
-
-                ball.setX(FRAME / 2);
-                ball.setY(FRAME / 2);
-                ball.setdx(getRandomDelta());
-                ball.setdy(getRandomDelta());
-
-                drawScreen();
-
-
-                //repaint();
-                try
-                {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e)
-                {
-
-                    e.printStackTrace();
-                }
-
-                //record = (record>hits)? record : hits;
-                //hits =0;
+                resetBallToStartingPosition();
             }
 
             drawScreen();
 
-            try
-            {
-                Thread.sleep(50);
-            } catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
+
         }
     }
 
-    private void ResetGame() {
+    private void resetBallToStartingPosition() {
+        ball.setX(FRAME / 2);
+        ball.setY(FRAME / 2);
+        ball.setdx(getRandomDelta());
+        ball.setdy(getRandomDelta());
+    }
+
+    private void resetGame() {
         leftPlayer.resetScore();
         rightPlayer.resetScore();
+        // give viewer a chance to set that game was reset
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void drawScreen()
@@ -197,6 +180,18 @@ public class PongGame extends JPanel implements Runnable
 
         repaint();
 
+        int pauseInterval = normalPauseInterval;
+        if (ResetGameKey.isPressed()){
+            pauseInterval = gameResetPauseInterval;
+            ResetGameKey.setPressed(false);
+        }
+        try
+        {
+            Thread.sleep(pauseInterval);
+        } catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private void updateScoreBoard(){
@@ -219,9 +214,14 @@ public class PongGame extends JPanel implements Runnable
             myBuffer.drawString(message, x, getFrameSize() / 8);
         }
 
-        if (this.gameIsActive == false){
+        // Display message in (approximately) middle of screen if any of the special game control keys were pressed:
+        x = getFrameSize() / 6;
+        if (StopGameKey.isPressed()){
             message = "GAME STOP KEY WAS PRESSED";
-            myBuffer.drawString(message, getFrameSize() / 6, getFrameSize() / 3);
+            myBuffer.drawString(message, x, getFrameSize() / 3);
+        } else if (ResetGameKey.isPressed()){
+            message = "GAME RESET KEY WAS PRESSED";
+            myBuffer.drawString(message, x, getFrameSize() / 3);
         }
     }
 
