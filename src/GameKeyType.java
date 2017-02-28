@@ -1,6 +1,8 @@
 public enum GameKeyType
 {
-    UP,
     DOWN,
-    STOP
+    UP,
+    RESET,
+    STOP,
+    SUSPEND
 }

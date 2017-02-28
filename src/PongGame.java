@@ -28,6 +28,7 @@ public class PongGame extends JPanel implements Runnable
 
     private boolean gameIsActive;
     private static final GameKey StopGameKey = new GameKey(GameKeyType.STOP, KeyEvent.VK_CLOSE_BRACKET);
+    private static final GameKey ResetGameKey = new GameKey(GameKeyType.RESET, KeyEvent.VK_R);
 
     private static final int WinningScore = 5;
 
@@ -56,7 +57,7 @@ public class PongGame extends JPanel implements Runnable
         this.gameIsActive = true;
 
         game = new Thread(this);
-        GameKeyListener listener = new GameKeyListener(game, leftPlayer, rightPlayer, StopGameKey);
+        GameKeyListener listener = new GameKeyListener(game, leftPlayer, rightPlayer, StopGameKey, ResetGameKey);
         addKeyListener(listener);
         setFocusable(true);
         game.start();
@@ -97,6 +98,8 @@ public class PongGame extends JPanel implements Runnable
 
             else if (StopGameKey.isPressed()){
                 this.gameIsActive = false;
+            } else if(ResetGameKey.isPressed()){
+                ResetGame();
             }
 
             // clear buffer and move ball
@@ -168,6 +171,11 @@ public class PongGame extends JPanel implements Runnable
         }
     }
 
+    private void ResetGame() {
+        leftPlayer.resetScore();
+        rightPlayer.resetScore();
+    }
+
     private void drawScreen()
     {
         ball.draw(myBuffer);
@@ -209,6 +217,11 @@ public class PongGame extends JPanel implements Runnable
             this.gameIsActive = false;
             message = "WINNER";
             myBuffer.drawString(message, x, getFrameSize() / 8);
+        }
+
+        if (this.gameIsActive == false){
+            message = "GAME STOP KEY WAS PRESSED";
+            myBuffer.drawString(message, getFrameSize() / 6, getFrameSize() / 3);
         }
     }
 

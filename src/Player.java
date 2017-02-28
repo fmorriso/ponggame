@@ -78,6 +78,10 @@ public class Player
         */
     }
 
+    public void resetScore(){
+        this.score = 0;
+    }
+
     public int getScore()
     {
         return score;
