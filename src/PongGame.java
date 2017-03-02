@@ -1,4 +1,5 @@
 // Fred Morrison - March 2017
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.*;
@@ -52,21 +53,26 @@ public class PongGame extends JPanel implements Runnable
         record = 0;
         hits = 0;
 
+        // create players and select their choice of up/down keys
         leftPlayer = new Player(new GameKey(GameKeyType.UP, KeyEvent.VK_A),
-                                new GameKey(GameKeyType.DOWN, KeyEvent.VK_Z));
+                new GameKey(GameKeyType.DOWN, KeyEvent.VK_Z));
+
         rightPlayer = new Player(new GameKey(GameKeyType.UP, KeyEvent.VK_UP),
-                                 new GameKey(GameKeyType.DOWN, KeyEvent.VK_DOWN));
+                new GameKey(GameKeyType.DOWN, KeyEvent.VK_DOWN));
 
         this.gameIsActive = true;
 
         game = new Thread(this);
+
         GameKeyListener listener = new GameKeyListener(game, leftPlayer, rightPlayer, StopGameKey, ResetGameKey);
         addKeyListener(listener);
+
         setFocusable(true);
         game.start();
     }
 
-    private double getRandomDelta(){
+    private double getRandomDelta()
+    {
         double minimumDelta = 10;
         double computedDelta = Math.random() * FRAME / 40;
         computedDelta = Math.max(computedDelta, minimumDelta);
@@ -99,11 +105,11 @@ public class PongGame extends JPanel implements Runnable
             else if (rightPlayer.keyPressed(GameKeyType.DOWN))
                 bumperRight.setY((bumperRight.getY() + bumperRight.getYWidth() >= FRAME) ? bumperRight.getY() : bumperRight.getY() + INCREM);
 
-            else if (StopGameKey.isPressed()){
+            else if (StopGameKey.isPressed())
                 this.gameIsActive = false;
-            } else if(ResetGameKey.isPressed()){
+
+            else if (ResetGameKey.isPressed())
                 resetGame();
-            }
 
             // clear buffer and move ball
             myBuffer.setColor(BACKGROUND);
@@ -122,14 +128,14 @@ public class PongGame extends JPanel implements Runnable
             }
 
             // did the player on the left miss the ball coming at his bumper ?
-            if ( ( ball.getX() - ball.getRadius() ) <= 0)
+            if ((ball.getX() - ball.getRadius()) <= 0)
             {
                 // Yes, reward the player on the right
                 rightPlayer.rewardPlayer();
                 resetBallToStartingPosition();
             }
             // did the player on the right miss the ball coming at his bumper?
-            else if ( (ball.getX() + ball.getRadius() ) >= FRAME)
+            else if ((ball.getX() + ball.getRadius()) >= FRAME)
             {
                 // Yes, reward the player on the left
                 leftPlayer.rewardPlayer();
@@ -140,14 +146,16 @@ public class PongGame extends JPanel implements Runnable
         }
     }
 
-    private void resetBallToStartingPosition() {
+    private void resetBallToStartingPosition()
+    {
         ball.setX(FRAME / 2);
         ball.setY(FRAME / 2);
         ball.setdx(getRandomDelta());
         ball.setdy(getRandomDelta());
     }
 
-    private void resetGame() {
+    private void resetGame()
+    {
         leftPlayer.resetScore();
         rightPlayer.resetScore();
         resetBallToStartingPosition();
@@ -167,7 +175,8 @@ public class PongGame extends JPanel implements Runnable
 
         // pause to allow players to see ball movement or game reset message
         int pauseInterval = ballMovementPauseInterval;
-        if (ResetGameKey.isPressed()){
+        if (ResetGameKey.isPressed())
+        {
             pauseInterval = gameResetPauseInterval;
             ResetGameKey.setPressed(false);
         }
@@ -180,7 +189,8 @@ public class PongGame extends JPanel implements Runnable
         }
     }
 
-    private void updateScoreBoard(){
+    private void updateScoreBoard()
+    {
 
         myBuffer.setColor(TEXT_COLOR);
         myBuffer.setFont(new Font("Monospaced", Font.BOLD, FRAME / 22));
@@ -188,7 +198,8 @@ public class PongGame extends JPanel implements Runnable
         String message = "Player Left:" + leftPlayer.getScore();
         int x = 0;
         myBuffer.drawString(message, x, getFrameSize() / 16);
-        if (leftPlayer.getScore() == WinningScore) {
+        if (leftPlayer.getScore() == WinningScore)
+        {
             this.gameIsActive = false;
             message = "WINNER";
             myBuffer.drawString(message, x, getFrameSize() / 8);
@@ -197,7 +208,8 @@ public class PongGame extends JPanel implements Runnable
         message = "Player Right:" + rightPlayer.getScore();
         x = getFrameSize() / 2;
         myBuffer.drawString(message, x, getFrameSize() / 16);
-        if (rightPlayer.getScore() == WinningScore) {
+        if (rightPlayer.getScore() == WinningScore)
+        {
             this.gameIsActive = false;
             message = "WINNER";
             myBuffer.drawString(message, x, getFrameSize() / 8);
@@ -205,10 +217,12 @@ public class PongGame extends JPanel implements Runnable
 
         // Display message in (approximately) middle of screen if any of the special game control keys were pressed:
         x = getFrameSize() / 6;
-        if (StopGameKey.isPressed()){
+        if (StopGameKey.isPressed())
+        {
             message = "GAME STOP KEY WAS PRESSED";
             myBuffer.drawString(message, x, getFrameSize() / 3);
-        } else if (ResetGameKey.isPressed()){
+        } else if (ResetGameKey.isPressed())
+        {
             message = "GAME RESET KEY WAS PRESSED";
             myBuffer.drawString(message, x, getFrameSize() / 3);
         }
