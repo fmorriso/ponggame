@@ -167,8 +167,6 @@ public class PongGame extends JPanel implements Runnable
         bumperRight.draw(myBuffer);
         bumperLeft.draw(myBuffer);
 
-        // update hits on buffer
-
         updateScoreBoard();
 
         repaint();
