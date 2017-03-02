@@ -5,10 +5,12 @@ import java.awt.*;
 import java.awt.image.*;
 import java.awt.event.KeyEvent;
 
+import static java.lang.Math.random;
+
 public class PongGame extends JPanel implements Runnable
 {
     private static final int FRAME = 800;
-    private final int INCREM = FRAME / 20;
+    private static final int INCREM = FRAME / 20;
     private static final Color BACKGROUND = Color.decode("#240062"); //.black;
     private static final Color BALL_COLOR = Color.green;
     private static final Color BUMPER_COLOR = Color.WHITE;
@@ -32,7 +34,7 @@ public class PongGame extends JPanel implements Runnable
     private static final GameKey StopGameKey = new GameKey(GameKeyType.STOP, KeyEvent.VK_CLOSE_BRACKET);
     private static final GameKey ResetGameKey = new GameKey(GameKeyType.RESET, KeyEvent.VK_R);
 
-    private static final int WinningScore = 5;
+    private static final int WinningScore = 7;
     private final int ballMovementPauseInterval = 50;
     private final int gameResetPauseInterval = 2000;
 
@@ -74,7 +76,7 @@ public class PongGame extends JPanel implements Runnable
     private double getRandomDelta()
     {
         double minimumDelta = 10;
-        double computedDelta = Math.random() * FRAME / 40;
+        double computedDelta = random() * FRAME / 40;
         computedDelta = Math.max(computedDelta, minimumDelta);
         return computedDelta;
     }
@@ -97,13 +99,13 @@ public class PongGame extends JPanel implements Runnable
                 bumperLeft.setY((bumperLeft.getY() <= 0) ? bumperLeft.getY() : bumperLeft.getY() - INCREM);
 
             else if (leftPlayer.keyPressed(GameKeyType.DOWN))
-                bumperLeft.setY((bumperLeft.getY() + bumperLeft.getYWidth() >= FRAME) ? bumperLeft.getY() : bumperLeft.getY() + INCREM);
+                bumperLeft.setY((bumperLeft.getY() + bumperLeft.getYWidth() >= getFrameSize()) ? bumperLeft.getY() : bumperLeft.getY() + INCREM);
 
             else if (rightPlayer.keyPressed(GameKeyType.UP))
                 bumperRight.setY((bumperRight.getY() <= 0) ? bumperRight.getY() : bumperRight.getY() - INCREM);
 
             else if (rightPlayer.keyPressed(GameKeyType.DOWN))
-                bumperRight.setY((bumperRight.getY() + bumperRight.getYWidth() >= FRAME) ? bumperRight.getY() : bumperRight.getY() + INCREM);
+                bumperRight.setY((bumperRight.getY() + bumperRight.getYWidth() >= getFrameSize()) ? bumperRight.getY() : bumperRight.getY() + INCREM);
 
             else if (StopGameKey.isPressed())
                 this.gameIsActive = false;
@@ -113,7 +115,7 @@ public class PongGame extends JPanel implements Runnable
 
             // clear buffer and move ball
             myBuffer.setColor(BACKGROUND);
-            myBuffer.fillRect(0, 0, FRAME, FRAME);
+            myBuffer.fillRect(0, 0, getFrameSize(), getFrameSize());
             ball.move(FRAME, FRAME);
 
             // check for collisions
@@ -135,7 +137,7 @@ public class PongGame extends JPanel implements Runnable
                 resetBallToStartingPosition();
             }
             // did the player on the right miss the ball coming at his bumper?
-            else if ((ball.getX() + ball.getRadius()) >= FRAME)
+            else if ((ball.getX() + ball.getRadius()) >= getFrameSize())
             {
                 // Yes, reward the player on the left
                 leftPlayer.rewardPlayer();
@@ -148,10 +150,17 @@ public class PongGame extends JPanel implements Runnable
 
     private void resetBallToStartingPosition()
     {
-        ball.setX(FRAME / 2);
-        ball.setY(FRAME / 2);
-        ball.setdx(getRandomDelta());
-        ball.setdy(getRandomDelta());
+        ball.setX(getFrameSize() / 2);
+        ball.setY(getFrameSize() / 2);
+        int direction = flipCoin();
+        ball.setdx(getRandomDelta() * direction);
+        ball.setdy(getRandomDelta() * direction);
+    }
+
+    private int flipCoin(){
+        // generate a 0 or a 1 randomly
+        int flip = (int) (Math.random() * 2);
+        return flip == 0 ? 1 : -1;
     }
 
     private void resetGame()
@@ -191,7 +200,7 @@ public class PongGame extends JPanel implements Runnable
     {
 
         myBuffer.setColor(TEXT_COLOR);
-        myBuffer.setFont(new Font("Monospaced", Font.BOLD, FRAME / 22));
+        myBuffer.setFont(new Font("Monospaced", Font.BOLD, getFrameSize() / 22));
 
         String message = "Player Left:" + leftPlayer.getScore();
         int x = 0;
