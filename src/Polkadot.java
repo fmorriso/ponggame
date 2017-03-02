@@ -1,3 +1,4 @@
+// Fred Morrison - March 2017
 import java.awt.*;
 
 public class Polkadot

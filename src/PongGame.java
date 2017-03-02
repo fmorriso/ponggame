@@ -1,3 +1,4 @@
+// Fred Morrison - March 2017
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.*;
@@ -5,7 +6,6 @@ import java.awt.event.KeyEvent;
 
 public class PongGame extends JPanel implements Runnable
 {
-    private static final long serialVersionUID = 1L;
     private static final int FRAME = 800;
     private final int INCREM = FRAME / 20;
     private static final Color BACKGROUND = Color.decode("#240062"); //.black;
@@ -32,7 +32,7 @@ public class PongGame extends JPanel implements Runnable
     private static final GameKey ResetGameKey = new GameKey(GameKeyType.RESET, KeyEvent.VK_R);
 
     private static final int WinningScore = 5;
-    private final int ballMovementPausInterval = 50;
+    private final int ballMovementPauseInterval = 50;
     private final int gameResetPauseInterval = 2000;
 
     public PongGame()
@@ -166,7 +166,7 @@ public class PongGame extends JPanel implements Runnable
         repaint();
 
         // pause to allow players to see ball movement or game reset message
-        int pauseInterval = ballMovementPausInterval;
+        int pauseInterval = ballMovementPauseInterval;
         if (ResetGameKey.isPressed()){
             pauseInterval = gameResetPauseInterval;
             ResetGameKey.setPressed(false);

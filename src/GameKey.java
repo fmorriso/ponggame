@@ -1,3 +1,4 @@
+// Fred Morrison - March 2017
 public class GameKey
 {
     private GameKeyType keyType;
