@@ -43,6 +43,8 @@ public class Bumper
         return myY;
     }
 
+    public int getYbottom() { return myY + myYWidth; }
+
     public int getXWidth()
     {
         return myXWidth;
