@@ -26,14 +26,16 @@ public class PongGame extends JPanel implements Runnable
     private Bumper bumperLeft, bumperRight;
 
     private int hits, record;
+    private boolean pointWasScored;
 
     private boolean gameIsActive;
     private static final GameKey StopGameKey = new GameKey(GameKeyType.STOP, KeyEvent.VK_CLOSE_BRACKET);
     private static final GameKey ResetGameKey = new GameKey(GameKeyType.RESET, KeyEvent.VK_R);
 
     private static final int WinningScore = 5;
-    private final int ballMovementPausInterval = 50;
-    private final int gameResetPauseInterval = 2000;
+    private static final int ballMovementPausInterval = 50;
+    private static final int gameResetPauseInterval = 2000;
+    private static final int pointScoredPauseInterval = 1500;
 
     public PongGame()
     {
@@ -110,22 +112,22 @@ public class PongGame extends JPanel implements Runnable
             myBuffer.fillRect(0, 0, FRAME, FRAME);
             ball.move(FRAME, FRAME);
 
+            pointWasScored = false;
+
             // check for collisions
             if (BumperCollision.isCollision(bumperLeft, ball))
             {
-                hits++;
                 BumperCollision.collide(bumperLeft, ball);
             } else if (BumperCollision.isCollision(bumperRight, ball))
             {
-                hits++;
                 BumperCollision.collide(bumperRight, ball);
             }
-
             // did the player on the left miss the ball coming at his bumper ?
             if ( ( ball.getX() - ball.getRadius() ) <= 0)
             {
                 // Yes, reward the player on the right
                 rightPlayer.rewardPlayer();
+                pointWasScored = true;
                 resetBallToStartingPosition();
             }
             // did the player on the right miss the ball coming at his bumper?
@@ -133,6 +135,7 @@ public class PongGame extends JPanel implements Runnable
             {
                 // Yes, reward the player on the left
                 leftPlayer.rewardPlayer();
+                pointWasScored = true;
                 resetBallToStartingPosition();
             }
 
@@ -175,9 +178,11 @@ public class PongGame extends JPanel implements Runnable
 
         // pause to allow players to see ball movement or game reset message
         int pauseInterval = ballMovementPausInterval;
-        if (ResetGameKey.isPressed()){
+        if (ResetGameKey.isPressed() ){
             pauseInterval = gameResetPauseInterval;
             ResetGameKey.setPressed(false);
+        } else if (pointWasScored){
+            pauseInterval = pointScoredPauseInterval;
         }
         try
         {
