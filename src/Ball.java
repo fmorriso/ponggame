@@ -1,4 +1,4 @@
-//Name:              Date:
+// Fred Morrison - March 2017
 
 import java.awt.*;
 

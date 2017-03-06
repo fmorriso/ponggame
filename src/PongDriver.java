@@ -1,4 +1,4 @@
-// Torbert, 7.20.06
+// Fred Morrison - March 2017
 
 import javax.swing.JFrame;
 public class PongDriver
@@ -15,6 +15,5 @@ public class PongDriver
         frame.setContentPane(p);
         p.requestFocus();
         frame.setVisible(true);
-
     }
 }

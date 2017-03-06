@@ -1,4 +1,4 @@
-import java.awt.*;
+// Fred Morrison - March 2017
 import java.awt.event.KeyEvent;
 
 public class Player
