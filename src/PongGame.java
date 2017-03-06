@@ -91,7 +91,7 @@ public class PongGame extends JPanel implements Runnable
                 bumperLeft.setY((bumperLeft.getY() <= 0) ? bumperLeft.getY() : bumperLeft.getY() - INCREM);
 
             else if (leftPlayer.keyPressed(GameKeyType.DOWN))
-                bumperLeft.setY((bumperLeft.getY() + bumperLeft.getYWidth() >= FRAME) ? bumperLeft.getY() : bumperLeft.getY() + INCREM);
+                bumperLeft.setY((bumperLeft.getYbottom() >= FRAME) ? bumperLeft.getY() : bumperLeft.getY() + INCREM);
 
             else if (rightPlayer.keyPressed(GameKeyType.UP))
                 bumperRight.setY((bumperRight.getY() <= 0) ? bumperRight.getY() : bumperRight.getY() - INCREM);
@@ -143,8 +143,16 @@ public class PongGame extends JPanel implements Runnable
     private void resetBallToStartingPosition() {
         ball.setX(FRAME / 2);
         ball.setY(FRAME / 2);
-        ball.setdx(getRandomDelta());
-        ball.setdy(getRandomDelta());
+        int direction = coinFlip();
+        ball.setdx(getRandomDelta() * direction);
+        ball.setdy(getRandomDelta() * direction);
+    }
+
+    private int coinFlip(){
+        double r = Math.random() * 2;
+        int i = (int) (r);
+        if (i == 0) return -1;
+        return 1;
     }
 
     private void resetGame() {
