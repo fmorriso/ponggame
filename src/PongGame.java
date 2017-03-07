@@ -137,7 +137,7 @@ public class PongGame extends JPanel implements Runnable
                 pointWasScored = true;
                 resetBallToStartingPosition();
             }
-            else if ((ball.getX() + ball.getRadius()) >= FRAME)
+            else if ((ball.getX() + ball.getRadius()) >= getFrameSize() )
             {
                 // player on right missed the ball, reward the player on the left
                 leftPlayer.rewardPlayer();
