@@ -37,6 +37,8 @@ public class PongGame extends JPanel implements Runnable
     private static final int gameResetPauseInterval = 2000;
     private static final int pointScoredPauseInterval = 1500;
 
+    private static final Font scoreboardFront = new Font("Monospaced", Font.BOLD, FRAME / 22);
+
     public PongGame()
     {
         myImage = new BufferedImage(FRAME, FRAME, BufferedImage.TYPE_INT_RGB);
@@ -200,38 +202,42 @@ public class PongGame extends JPanel implements Runnable
     {
 
         myBuffer.setColor(TEXT_COLOR);
-        myBuffer.setFont(new Font("Monospaced", Font.BOLD, FRAME / 22));
+        myBuffer.setFont(scoreboardFront);
 
         String message = "Player Left:" + leftPlayer.getScore();
         int x = 0;
-        myBuffer.drawString(message, x, getFrameSize() / 16);
+        int yScore = getFrameSize() / 16;
+        int yWinner = getFrameSize() / 8;
+
+        myBuffer.drawString(message, x, yScore);
         if (leftPlayer.getScore() == WinningScore)
         {
             this.gameIsActive = false;
             message = "WINNER";
-            myBuffer.drawString(message, x, getFrameSize() / 8);
+            myBuffer.drawString(message, x, yWinner);
         }
 
         message = "Player Right:" + rightPlayer.getScore();
         x = getFrameSize() / 2;
-        myBuffer.drawString(message, x, getFrameSize() / 16);
+        myBuffer.drawString(message, x, yScore);
         if (rightPlayer.getScore() == WinningScore)
         {
             this.gameIsActive = false;
             message = "WINNER";
-            myBuffer.drawString(message, x, getFrameSize() / 8);
+            myBuffer.drawString(message, x, yWinner);
         }
 
         // Display message in (approximately) middle of screen if any of the special game control keys were pressed:
         x = getFrameSize() / 6;
+        int yMiddle = getFrameSize() / 3;
         if (StopGameKey.isPressed())
         {
             message = "GAME STOP KEY WAS PRESSED";
-            myBuffer.drawString(message, x, getFrameSize() / 3);
+            myBuffer.drawString(message, x, yMiddle);
         } else if (ResetGameKey.isPressed())
         {
             message = "GAME RESET KEY WAS PRESSED";
-            myBuffer.drawString(message, x, getFrameSize() / 3);
+            myBuffer.drawString(message, x, yMiddle);
         }
     }
 }
