@@ -116,8 +116,8 @@ public class PongGame extends JPanel implements Runnable
 
             // clear buffer and move ball
             myBuffer.setColor(BACKGROUND);
-            myBuffer.fillRect(0, 0, FRAME, FRAME);
-            ball.move(FRAME, FRAME);
+            myBuffer.fillRect(0, 0, getFrameSize(), getFrameSize());
+            ball.move(getFrameSize(), getFrameSize());
 
             pointWasScored = false;
 
