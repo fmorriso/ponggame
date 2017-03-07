@@ -151,12 +151,14 @@ public class PongGame extends JPanel implements Runnable
 
     private void resetBallToStartingPosition()
     {
-        ball.setX(FRAME / 2);
-        ball.setY(FRAME / 2);
-        int direction = coinFlip();
-        ball.setdx(getRandomDelta() * direction);
-        direction = coinFlip();
-        ball.setdy(getRandomDelta() * direction);
+        // return ball to the middle of the screen
+        int middle = getFrameSize() / 2;
+        ball.setX(middle);
+        ball.setY(middle);
+
+        // change speed and direction of the ball
+        ball.setdx(getRandomDelta() * coinFlip() );
+        ball.setdy(getRandomDelta() * coinFlip() );
     }
 
     private int coinFlip()
