@@ -33,6 +33,9 @@ public class PongGame extends JPanel implements Runnable
     private static final GameKey ResetGameKey = new GameKey(GameKeyType.RESET, KeyEvent.VK_R);
 
     private static final int WinningScore = 5;
+
+    private static final double minimumDelta = 10;
+
     private static final int ballMovementPausInterval = 50;
     private static final int gameResetPauseInterval = 2000;
     private static final int pointScoredPauseInterval = 1500;
@@ -72,13 +75,12 @@ public class PongGame extends JPanel implements Runnable
 
     private double getRandomDelta()
     {
-        double minimumDelta = 10;
         double computedDelta = Math.random() * FRAME / 40;
         computedDelta = Math.max(computedDelta, minimumDelta);
         return computedDelta;
     }
 
-    public int getFrameSize()
+    private int getFrameSize()
     {
         return FRAME;
     }
@@ -119,12 +121,14 @@ public class PongGame extends JPanel implements Runnable
 
             pointWasScored = false;
 
-            // check for collisions
+            // Check to see if ball hit a bumper or was missed by one of the players
             if (BumperCollision.isCollision(bumperLeft, ball))
             {
+                // ball hit player on the left bumper, so bound off it
                 BumperCollision.collide(bumperLeft, ball);
             } else if (BumperCollision.isCollision(bumperRight, ball))
             {
+                // ball hit player on the right bumper, so bound off of it
                 BumperCollision.collide(bumperRight, ball);
             } else if ((ball.getX() - ball.getRadius()) <= 0)
             {
@@ -151,6 +155,7 @@ public class PongGame extends JPanel implements Runnable
         ball.setY(FRAME / 2);
         int direction = coinFlip();
         ball.setdx(getRandomDelta() * direction);
+        direction = coinFlip();
         ball.setdy(getRandomDelta() * direction);
     }
 
