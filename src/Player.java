@@ -1,4 +1,5 @@
 // Fred Morrison - March 2017
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Player
@@ -72,10 +73,9 @@ public class Player
 
     public void rewardPlayer(){
         this.score ++;
-        /* uncomment to make a sound
+        // uncomment to make a sound
         final Runnable runnable = (Runnable) Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.exclamation");
         if (runnable != null) runnable.run();
-        */
     }
 
     public void resetScore(){

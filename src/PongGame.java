@@ -26,7 +26,7 @@ public class PongGame extends JPanel implements Runnable
     private Bumper bumperLeft, bumperRight;
 
     private int hits, record;
-    private boolean pointWasScored;
+    private boolean pointWasScored = false;
 
     private boolean gameIsActive;
     private static final GameKey StopGameKey = new GameKey(GameKeyType.STOP, KeyEvent.VK_CLOSE_BRACKET);
@@ -36,7 +36,7 @@ public class PongGame extends JPanel implements Runnable
 
     private static final double minimumDelta = 10;
 
-    private static final int ballMovementPausInterval = 50;
+    private static final int ballMovementPauseInterval = 50;
     private static final int gameResetPauseInterval = 2000;
     private static final int pointScoredPauseInterval = 1500;
 
@@ -75,7 +75,7 @@ public class PongGame extends JPanel implements Runnable
 
     private double getRandomDelta()
     {
-        double computedDelta = Math.random() * FRAME / 40;
+        double computedDelta = Math.random() * getFrameSize() / 40;
         computedDelta = Math.max(computedDelta, minimumDelta);
         return computedDelta;
     }
@@ -161,6 +161,9 @@ public class PongGame extends JPanel implements Runnable
         ball.setdy(getRandomDelta() * coinFlip() );
     }
 
+    // flips a coin
+    // returns -1 if heads
+    // returns 1 if tails
     private int coinFlip()
     {
         double r = Math.random() * 2;
@@ -187,7 +190,7 @@ public class PongGame extends JPanel implements Runnable
         repaint();
 
         // pause to allow players to see ball movement, a point was scored, or game was reset message
-        int pauseInterval = ballMovementPausInterval;
+        int pauseInterval = ballMovementPauseInterval;
         if (ResetGameKey.isPressed())
         {
             pauseInterval = gameResetPauseInterval;
@@ -207,7 +210,6 @@ public class PongGame extends JPanel implements Runnable
 
     private void updateScoreBoard()
     {
-
         myBuffer.setColor(TEXT_COLOR);
         myBuffer.setFont(scoreboardFront);
 
