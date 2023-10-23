@@ -11,8 +11,8 @@ public class PongDriver
         JFrame frame = new JFrame(String.format("Pong - java version %s", version));
 
         Dimension scaledSize = getScaledSize(0.75, 100);
-
-        frame.setSize(scaledSize.width, scaledSize.height);
+        // keep window square
+        frame.setSize(scaledSize.height, scaledSize.height);
         frame.setLocation(0, 0);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
