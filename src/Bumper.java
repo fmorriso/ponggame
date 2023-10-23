@@ -16,11 +16,7 @@ public class Bumper
     //constructors
     public Bumper()         //default constructor
     {
-        myX = 200;
-        myY = 200;
-        myXWidth = 20;
-        myYWidth = 40;
-        myColor = Color.BLUE;
+        this(200, 200, 20, 40, Color.BLUE);
     }
 
     public Bumper(int x, int y, int xWidth, int yWidth, Color c)
