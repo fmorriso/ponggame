@@ -13,7 +13,7 @@ public class PongDriver
         Dimension scaledSize = getScaledSize(0.75, 100);
         // keep window square
         frame.setSize(scaledSize.height, scaledSize.height);
-        frame.setLocation(0, 0);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         PongGame p = new PongGame();
