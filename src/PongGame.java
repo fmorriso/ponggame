@@ -25,7 +25,7 @@ public class PongGame extends JPanel implements Runnable
     private Ball ball;
     private Bumper bumperLeft, bumperRight;
 
-    private int hits, record;
+    private int hits = 0, record = 0;
     private boolean pointWasScored = false;
 
     private boolean gameIsActive;
@@ -75,8 +75,10 @@ public class PongGame extends JPanel implements Runnable
 
     private double getRandomDelta()
     {
-        double computedDelta = Math.random() * getFrameSize() / 40;
-        computedDelta = Math.max(computedDelta, minimumDelta);
+        final double MIN = minimumDelta;
+        final double MAX = getFrameSize() / 40;
+        final double RANGE = MAX - MIN;
+        double computedDelta = Math.random() * RANGE + MIN;     
         return computedDelta;
     }
 
