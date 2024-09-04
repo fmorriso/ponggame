@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7295bdbe-1879-471c-bb82-8801599b5b82" name="Default Changelist" comment="" />
+    <list default="true" id="7295bdbe-1879-471c-bb82-8801599b5b82" name="Default Changelist" comment="keep scaled game size square">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ponggame/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ponggame/Ball.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ponggame/Bumper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ponggame/Bumper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ponggame/BumperCollision.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ponggame/BumperCollision.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ponggame/GameKey.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ponggame/GameKey.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ponggame/GameKeyListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ponggame/GameKeyListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ponggame/GameKeyType.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ponggame/GameKeyType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ponggame/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ponggame/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/ponggame/Polkadot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ponggame/Polkadot.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +26,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "fmorriso"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/fmorriso/ponggame.git",
+    "accountId": "93b2abae-08a5-4909-846c-3a532fe0f545"
+  }
+}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -56,21 +81,31 @@
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/projects/java/ponggame&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.PongDriver.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/projects/java/ponggame",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="PongDriver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="PongDriver" />
@@ -84,6 +119,14 @@
         <item itemvalue="Application.PongDriver" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -99,6 +142,7 @@
       <workItem from="1669677224310" duration="12000" />
       <workItem from="1669678161382" duration="935000" />
       <workItem from="1669942188699" duration="35000" />
+      <workItem from="1725487489768" duration="472000" />
     </task>
     <task id="LOCAL-00001" summary="commit changes">
       <option name="closed" value="true" />
@@ -116,7 +160,55 @@
       <option name="project" value="LOCAL" />
       <updated>1698033654724</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="keep scaled game size square">
+      <option name="closed" value="true" />
+      <created>1725487637322</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1725487637322</updated>
+    </task>
+    <task id="LOCAL-00004" summary="keep scaled game size square">
+      <option name="closed" value="true" />
+      <created>1725487647786</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1725487647786</updated>
+    </task>
+    <task id="LOCAL-00005" summary="keep scaled game size square">
+      <option name="closed" value="true" />
+      <created>1725487652895</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1725487652895</updated>
+    </task>
+    <task id="LOCAL-00006" summary="keep scaled game size square">
+      <option name="closed" value="true" />
+      <created>1725487668647</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1725487668647</updated>
+    </task>
+    <task id="LOCAL-00007" summary="keep scaled game size square">
+      <option name="closed" value="true" />
+      <created>1725487672248</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1725487672248</updated>
+    </task>
+    <task id="LOCAL-00008" summary="keep scaled game size square">
+      <option name="closed" value="true" />
+      <created>1725487676461</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1725487676461</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
